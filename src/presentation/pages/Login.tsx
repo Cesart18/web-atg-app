@@ -22,7 +22,7 @@ export const Login: React.FC = () => {
 
 
   return (
-    <section>
+    <section className='login-page'>
       <div className='login-form'>
       <h1>Login</h1>
       <input

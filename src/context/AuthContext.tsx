@@ -30,6 +30,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
   }
 
   const logout = async () => {
+    console.log(isLoading)
    await authRepository.logout()
    localStorage.removeItem('token')
    setIsLogged(false)

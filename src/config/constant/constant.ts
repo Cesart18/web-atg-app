@@ -1,2 +1,3 @@
-export const urlApi = "http://localhost:3001";
-// export const urlApi = "https://api-atg-app-production.up.railway.app";
+
+
+export const urlApi = import.meta.env.VITE_API_URL

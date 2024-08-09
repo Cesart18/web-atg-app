@@ -11,17 +11,16 @@ export class PlayerDatasourceImpl implements PlayerDatasource{
     constructor(urlApi:string){
         this.urlApi = urlApi
     }
-    createPlayer(name: string): Promise<void> {
+    createPlayer(_name: string): Promise<void> {
         throw new Error("Method not implemented.");
     }
     async getPlayers(): Promise<PlayerModel[]> {
-        // const url = `${this.urlApi}/players`
-        const url = 'http://localhost:3000/api/players'
+        const url = `${this.urlApi}/api/players`
         const resp = await http.axios.get(url)
         const data = await resp.data;
         return data as PlayerModel[];
     }
-    updatePlayer(newName: string): Promise<void> {
+    updatePlayer(_newName: string): Promise<void> {
         throw new Error("Method not implemented.");
     }
     plusDoublePoints(): Promise<void> {

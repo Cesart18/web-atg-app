@@ -1,8 +1,9 @@
+import { PlayerTable } from "../components/PlayerTable"
 
 export const Home = () => {
   return (
     <div>
-      Home
+      <PlayerTable/>
     </div>
   )
 }

@@ -1,6 +1,9 @@
+import { PlayerRanked } from "../components/PlayerRanked"
 
 export const Doubles = () => {
   return (
-    <div>Doubles</div>
+    <div>
+      <PlayerRanked isDouble={true}/>
+    </div>
   )
 }
