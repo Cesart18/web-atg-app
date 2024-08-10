@@ -1,10 +1,11 @@
-import { usePlayer } from "../../config/hooks/userPlayer";
+import { PlayerModel } from "../../domain/models/playerModel";
 import { playerModelToEntity } from "../../infrastructure/mappers/playerModelToEntity";
 
+interface PlayerTableProps {
+    players: PlayerModel[];
+  }
 
-
-export const PlayerTable = () => {
-    const { players } = usePlayer()
+export const PlayerTable: React.FC<PlayerTableProps>  = ({ players }) => {
     return (
         <table>
             <thead>

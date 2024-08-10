@@ -1,16 +1,14 @@
 import React from 'react'
-import { usePlayer } from '../../config/hooks/userPlayer'
 import { playerModelToEntity } from '../../infrastructure/mappers/playerModelToEntity'
+import { PlayerModel } from '../../domain/models/playerModel'
 
 
 interface PlayerRankingProps {
+  players: PlayerModel[];
   isDouble: boolean
 }
 
-export const PlayerRanked: React.FC<PlayerRankingProps>  = ({ isDouble }) => {
-    const { players } = usePlayer()
-    const sortedPlayers = isDouble ? players.sort((a, b) => b.doublePoints - a.doublePoints)
-    : players.sort((a, b) => b.singlePoints - a.singlePoints)
+export const PlayerRanked: React.FC<PlayerRankingProps>  = ({ isDouble, players }) => {
   return (
     <table>
     <thead>
@@ -21,7 +19,7 @@ export const PlayerRanked: React.FC<PlayerRankingProps>  = ({ isDouble }) => {
       </tr>
     </thead>
     <tbody>
-      {sortedPlayers.map((p) => {
+      {players.map((p) => {
         const player = playerModelToEntity(p);
         return (
           <tr key={p.ID}>

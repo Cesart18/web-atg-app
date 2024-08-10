@@ -1,32 +1,11 @@
-import { useEffect, useState } from "react";
-import { urlApi } from "../constant/constant";
-import { PlayerModel } from "../../domain/models/playerModel";
-import { PlayerDatasourceImpl } from "../../infrastructure/datasource/playerDatasourceImpl";
-import { PlayerRepositoryImpl } from "../../infrastructure/repositories/playerRepositoryImpl";
+import { useContext } from "react";
+import { PlayerContext } from "../../context/PlayerContext";
 
 
-const repository = new PlayerRepositoryImpl( new PlayerDatasourceImpl(urlApi ?? '') )
 export const usePlayer = () => {
-    const [players, setPlayers] = useState<PlayerModel[]>([])
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        const fetchPlayers = async () => {
-          try {
-            const newPlayers = await repository.getPlayers();
-            setPlayers(newPlayers);
-          } catch (error) {
-            setError('Failed to fetch players');
-            console.error(error);
-          }
-        };
-    
-        fetchPlayers();
-      }, []);
-  return (
-    {
-        players,
-        error
-    } 
-  )
+    const context = useContext(PlayerContext);
+    if (!context){
+      throw new Error('usePlayers must be used within a PlayerProvider');
+    }
+    return context;
 }

@@ -3,18 +3,21 @@ import { Navbar } from './presentation/components/Navbar';
 import { AuthProvider } from './context/AuthContext';
 import { AppRouter } from './config/router/AppRouter';
 import './index.css';
+import { PlayerProvider } from './context/PlayerContext';
 
 
 
 const App = () => {
   return (
-    <AuthProvider>      
+    <AuthProvider>
+      <PlayerProvider>
     <Router>
       <Navbar/>
       <main>
       <AppRouter/>
       </main>
     </Router>
+        </PlayerProvider>      
     </AuthProvider>
   );
 };
