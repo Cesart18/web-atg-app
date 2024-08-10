@@ -9,7 +9,7 @@ export const AppRouter = () => {
   const { players } = usePlayer();
   return (
     <Routes>
-        <Route path="/" element={<Home players={players}/>} />
+        <Route path="/" element={<Home />} />
         <Route path="/doubles" element={<Doubles players={players} />} />
         <Route path="/singles" element={<Singles players={players} />} />
         <Route path="/login" element={<Login />} />
