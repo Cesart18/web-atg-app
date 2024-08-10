@@ -42,3 +42,83 @@ nav{
   a:hover::after{
   height: 2px;
   }
+
+  .icon-btn{
+    padding: 4px;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+    margin: 0 0 0 10px;
+    &:hover{
+      background-color: var(--primary-color);
+    }
+    &:active{
+      background-color: grey;
+    }
+  }
+
+  .icon-logout{
+    background-color: var(--primary-color);
+  }
+
+  .new-player-form{
+    display: flex;
+    gap: 20px;
+  }
+
+  .alert-btn{
+    background-color: red;
+    color: black;
+    padding: 6px 8px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:active{
+      background-color: green;
+    }
+  }
+
+  .red{
+    background-color: red;
+  }
+  .green{
+    background-color: green;
+  }
+
+  /* Modal.css */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 20px;
+}
+
+
+.modal p, .modal h2{ 
+  color: black;
+}
+
+.modal button {
+  margin-right: 10px;
+}

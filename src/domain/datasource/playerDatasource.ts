@@ -5,8 +5,11 @@ export interface PlayerDatasource {
     createPlayer( name:string ): Promise<void>
     getPlayers(): Promise<PlayerModel[]>
     updatePlayer( newName:string ): Promise<void>
-    plusDoublePoints(): Promise<void>
-    minusDoublePoints(): Promise<void>
-    plusSinglePoints(): Promise<void>
-    minusSinglePoints(): Promise<void>
+    togglePayedBalls( id: number ): Promise<void>;
+    toggleMemberShip( id: number ): Promise<void>;
+    plusDoublePoints( id: number, points:number): Promise<void>
+    minusDoublePoints( id: number, points:number): Promise<void>
+    plusSinglePoints( id: number, points:number): Promise<void>
+    minusSinglePoints( id: number, points:number): Promise<void>
+    deletePlayer(id:number): Promise<void>
 }

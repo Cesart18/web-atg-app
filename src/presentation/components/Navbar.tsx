@@ -25,8 +25,8 @@ export const Navbar = () => {
         </div>
       {
         isLogged ?
-          <FontAwesomeIcon onClick={logoutHandle}   icon={faRightFromBracket} />
-          : <FontAwesomeIcon onClick={() => navigate('/login')} icon={faRightToBracket} />
+          <button className='icon-btn icon-logout'><FontAwesomeIcon onClick={logoutHandle}   icon={faRightFromBracket} /></button>
+          : <button className='icon-btn'><FontAwesomeIcon onClick={() => navigate('/login')} icon={faRightToBracket} /></button>
       }
     </nav>
   )

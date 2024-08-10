@@ -40,6 +40,13 @@ main{
     border: none;
     border-radius: 10px;
 }
+.btn-secondary{
+    padding: 6px 10px;
+    background-color: gray;
+    border: none;
+    border-radius: 10px;
+    color: black;
+}
 input[type="text"], input[type="password"] {
     padding: 6px 10px;
     border: none;
@@ -77,3 +84,12 @@ table {
     gap: 20px;
     text-align: center;
   }
+
+  .home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
