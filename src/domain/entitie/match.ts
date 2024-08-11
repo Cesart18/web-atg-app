@@ -3,7 +3,7 @@ interface MatchConstructorParams {
   id: number;
   score: string;
   matchType: string;
-  matchPlayers: MatchPlayer[] | null;
+  matchPlayers: MatchPlayer[] | undefined;
   date: string;
 }
 
@@ -11,7 +11,7 @@ export class Match {
     id: number;
     score: string;
     matchType: string;
-    matchPlayers: MatchPlayer[] | null;
+    matchPlayers: MatchPlayer[] | undefined;
     date: string;
 
     constructor({ id, score, matchType, date, matchPlayers }:MatchConstructorParams){

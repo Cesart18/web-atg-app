@@ -1,4 +1,4 @@
-import { MatchPlayer } from "../entitie/matchPlayer";
+import { MatchPlayerModel } from "./matchPlayersModel";
 
 export interface MatchModel {
     ID:           number;
@@ -8,5 +8,5 @@ export interface MatchModel {
     score:        string;
     date:         string;
     matchType:    string;
-    matchPlayers: MatchPlayer[] | null;
+    matchPlayers: MatchPlayerModel[] | null;
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { playerModelToEntity } from '../../infrastructure/mappers/playerModelToEntity'
 import { PlayerModel } from '../../domain/models/playerModel'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 interface PlayerRankingProps {
@@ -10,6 +10,12 @@ interface PlayerRankingProps {
 }
 
 export const PlayerRanked: React.FC<PlayerRankingProps>  = ({ isDouble, players }) => {
+  const navigate = useNavigate();
+
+  const handleRowClick = (playerId: number) => {
+    navigate(`/players/${playerId}`);
+  };
+
   return (
     <div className="table-container">
       <table>
@@ -24,13 +30,12 @@ export const PlayerRanked: React.FC<PlayerRankingProps>  = ({ isDouble, players 
       {players.map((p) => {
         const player = playerModelToEntity(p);
         return (
-          <Link to={`/players/${player.id}`}>
-          <tr key={p.ID} className='details' >
+          <tr key={p.ID} className='details' onClick={() => handleRowClick(player.id)} >
             <td>{players.indexOf(p) + 1}</td>
             <td>{player.name}</td>
             <td>{isDouble? player.doublePoints : player.singlePoints }</td>
           </tr>
-          </Link>
+
         );
       })}
     </tbody>
