@@ -2,25 +2,25 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Player } from '../../domain/entitie/player';
-import { PlayerRepositoryImpl } from '../../infrastructure/repositories/playerRepositoryImpl';
-import { PlayerDatasourceImpl } from '../../infrastructure/datasource/playerDatasourceImpl';
-import { urlApi } from '../../config/constant/constant';
 import { playerModelToEntity } from '../../infrastructure/mappers/playerModelToEntity';
+import { PlayerModel } from '../../domain/models/playerModel';
 
 
-const repository = new PlayerRepositoryImpl( new PlayerDatasourceImpl(urlApi ?? '') )
 
-export const PlayerDetailsPage = () => {
+interface Props{
+  playersModel: PlayerModel[]
+}
+
+export const PlayerDetailsPage: React.FC<Props> = ({playersModel}) => {
   const { id } = useParams(); 
-  const [player, setPlayer] = useState<Player | null>(null);
-  const [players, setPlayers] = useState<Player[]>([])
+  const [player, setPlayer] = useState<Player | undefined>(undefined);
+  const players = playersModel.map((p) => playerModelToEntity(p))
+
 
   useEffect(() => {
-    const fetchPlayerDetails = async () => {
-      const playerData = await repository.getPlayerById(Number(id)); 
-      setPlayer(playerModelToEntity(playerData));
-      const playersData = await repository.getPlayers();
-      setPlayers(playersData.map((p) => playerModelToEntity(p)))
+    const fetchPlayerDetails =  () => {
+      const p = players.find((player) => player.id === Number(id) )
+      setPlayer(p)
     };
 
     fetchPlayerDetails();

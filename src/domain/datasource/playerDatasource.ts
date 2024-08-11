@@ -8,5 +8,6 @@ export interface PlayerDatasource {
     updatePlayer( newName:string ): Promise<void>
     togglePayedBalls( id: number ): Promise<void>;
     toggleMemberShip( id: number ): Promise<void>;
+    addMatch( ids:number[], score: string ): Promise<void>
     deletePlayer(id:number): Promise<void>
 }

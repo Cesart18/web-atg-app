@@ -10,10 +10,7 @@ interface PlayerContextType {
     updatePlayer: ( newName:string ) => void;
     togglePayedBalls: ( id: number ) => void;
     toggleMemberShip: ( id: number ) => void;
-    plusDoublePoints: () => void;
-    minusDoublePoints: () => void;
-    plusSinglePoints: () => void;
-    minusSinglePoints: () => void;
+    addMatch: (ids: number[], score: string) => void;
     deletePlayer: ( id:number ) => void;
 }
 
@@ -63,10 +60,6 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({children}) => {
     }
 
     const updatePlayer = () => {}
-    const plusDoublePoints = () => {}
-    const minusDoublePoints = () => {}
-    const plusSinglePoints = () => {}
-    const minusSinglePoints = () => {}
     const togglePayedBalls = async (id:number) => {
         try {
             await repository.togglePayedBalls(id)
@@ -117,18 +110,25 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({children}) => {
         }
     }
 
+    const addMatch = async ( ids: number[], score: string ) => {
+        if (ids.length === 1 || ids.length === 3) return;
+        try {
+            await repository.addMatch(ids, score);
+            fetchPlayers();
+        } catch (error) {
+            throw new Error('No se puede agregar el partido')
+        }
+    }
+
     return (
         <PlayerContext.Provider value={{
             players,
             createPlayer,
             updatePlayer,
-            plusDoublePoints,
-            minusDoublePoints,
-            plusSinglePoints,
-            minusSinglePoints,
             deletePlayer,
             togglePayedBalls,
             toggleMemberShip,
+            addMatch
             }}>
             {children}
         </PlayerContext.Provider>

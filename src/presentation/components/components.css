@@ -137,6 +137,28 @@ th, td{
 .details{
   cursor: pointer;
 }
+.match-form{
+  display: flex;
+  gap: 20px;
+}
+.select-container{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.select-container select{
+  color: black;
+}
+
+.match-form{
+  display: flex;
+  align-items: end;
+}
+
+
+strong{
+  color: black;
+}
 
 @media (width > 768px) {
   .table-container, table{

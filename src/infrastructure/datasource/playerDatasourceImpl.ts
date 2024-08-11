@@ -8,6 +8,24 @@ export class PlayerDatasourceImpl implements PlayerDatasource{
     constructor(urlApi:string){
         this.urlApi = urlApi;
     }
+    async addMatch(ids: number[], score: string): Promise<void> {
+        const token = localStorage.getItem('token')
+        const url = `${this.urlApi}/api/match`
+
+            const resp = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token ?? ''
+                  },
+                  body: JSON.stringify({ids, score})
+            })
+            if (!resp.ok){
+                const errorData = await resp.json();
+                throw new Error(errorData);
+            }
+        
+    }
     async getPlayerById(id: number): Promise<PlayerModel> {
         const url = `${this.urlApi}/api/player/${id}`;
         try {

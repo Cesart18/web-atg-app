@@ -1,11 +1,12 @@
-import { useAuth } from "../../config/hooks/useAuth";
 import { NewPlayerForm } from "../components/NewPlayerForm";
 import { PlayerTable } from "../components/PlayerTable"
 
+interface Props{
+  isLogged: boolean
+} 
 
-
-export const Home = () => {
-  const { isLogged } = useAuth();
+export const Home: React.FC<Props> = ({isLogged}) => {
+  
   return (
     <div className="home">
       <h1>Jugadores</h1>

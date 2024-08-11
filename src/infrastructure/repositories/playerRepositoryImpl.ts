@@ -9,6 +9,9 @@ export class PlayerRepositoryImpl implements PlayerRepository {
   constructor(datasource: PlayerDatasource) {
     this.datasource = datasource ?? new PlayerDatasourceImpl(urlApi ?? '');
   }
+  addMatch(ids: number[], score: string): Promise<void> {
+    return this.datasource.addMatch(ids,score)
+  }
   getPlayerById(id: number): Promise<PlayerModel> {
     return this.datasource.getPlayerById(id);
   }
