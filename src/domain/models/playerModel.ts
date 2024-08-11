@@ -1,3 +1,5 @@
+import { MatchPlayerModel } from "./matchPlayersModel";
+
 export interface PlayerModel {
     ID:                number;
     CreatedAt:         Date;
@@ -8,4 +10,5 @@ export interface PlayerModel {
     doublePoints:      number;
     isMembershipValid: boolean;
     isPayedBalls:      boolean;
+    matchPlayers:      MatchPlayerModel[];
 }

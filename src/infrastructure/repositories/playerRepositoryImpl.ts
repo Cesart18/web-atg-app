@@ -9,6 +9,9 @@ export class PlayerRepositoryImpl implements PlayerRepository {
   constructor(datasource: PlayerDatasource) {
     this.datasource = datasource ?? new PlayerDatasourceImpl(urlApi ?? '');
   }
+  getPlayerById(id: number): Promise<PlayerModel> {
+    return this.datasource.getPlayerById(id);
+  }
 
   createPlayer(name: string): Promise<void> {
     return this.datasource.createPlayer(name);
@@ -25,18 +28,6 @@ export class PlayerRepositoryImpl implements PlayerRepository {
   }
   toggleMemberShip(id: number): Promise<void> {
     return this.datasource.toggleMemberShip(id);
-  }
-  plusDoublePoints(id: number, points: number): Promise<void> {
-    return this.datasource.plusDoublePoints(id, points);
-  }
-  minusDoublePoints(id: number, points: number): Promise<void> {
-    return this.datasource.minusDoublePoints(id, points);
-  }
-  plusSinglePoints(id: number, points: number): Promise<void> {
-    return this.datasource.plusSinglePoints(id, points);
-  }
-  minusSinglePoints(id: number, points: number): Promise<void> {
-    return this.datasource.minusSinglePoints(id, points);
   }
   deletePlayer(id: number): Promise<void> {
     return this.datasource.deletePlayer(id);

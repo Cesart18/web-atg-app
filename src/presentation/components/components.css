@@ -45,9 +45,9 @@ nav{
 
   .icon-btn{
     padding: 4px;
-    background-color: var(--secondary-color);
+    background-color: black;
     border: none;
-    border-radius: 100%;
+    border-radius: 10px;
     cursor: pointer;
     margin: 0 0 0 10px;
     &:hover{
@@ -58,9 +58,6 @@ nav{
     }
   }
 
-  .icon-logout{
-    background-color: var(--primary-color);
-  }
 
   .new-player-form{
     display: flex;
@@ -81,7 +78,7 @@ nav{
   }
 
   .red{
-    background-color: red;
+    background-color: red !important;
   }
   .green{
     background-color: green;
@@ -121,4 +118,28 @@ nav{
 
 .modal button {
   margin-right: 10px;
+}
+
+.table-container{
+  overflow-x: auto;
+  padding: 10px;
+}
+
+table{
+  border-collapse: collapse;
+}
+
+th, td{
+  border: 1px solid;
+  padding: 16px;
+  text-align: left;
+}
+.details{
+  cursor: pointer;
+}
+
+@media (width > 768px) {
+  .table-container, table{
+    width: 100%;
+  }
 }

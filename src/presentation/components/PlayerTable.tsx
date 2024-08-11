@@ -1,4 +1,4 @@
-import { faCheck, faX } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { usePlayer } from "../../config/hooks/userPlayer";
 import { playerModelToEntity } from "../../infrastructure/mappers/playerModelToEntity";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,7 +7,9 @@ import { Modal } from "./Modal";
 
 interface PlayerTableProps {
     isLogged: boolean
+
   }
+
 
 export const PlayerTable: React.FC<PlayerTableProps>  = ({ isLogged }) => {
     const { players, deletePlayer, toggleMemberShip, togglePayedBalls } = usePlayer();
@@ -19,9 +21,9 @@ export const PlayerTable: React.FC<PlayerTableProps>  = ({ isLogged }) => {
         setIsModalOpen(true);
     };
 
-    const handleConfirmDelete = async () => {
+    const handleConfirmDelete =  () => {
         if (playerToDelete !== null) {
-            await deletePlayer(playerToDelete); // Llama a la función de eliminación
+            deletePlayer(playerToDelete); // Llama a la función de eliminación
             setPlayerToDelete(null);
         }
         setIsModalOpen(false);
@@ -34,38 +36,43 @@ export const PlayerTable: React.FC<PlayerTableProps>  = ({ isLogged }) => {
 
     return (
         <>
-        <table>
+        <div className="table-container">
+        <table className="player-table">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Membresia</th>
-                    <th>Pelotas</th>
-                    {isLogged && <th></th>}
+                <th>Nombre</th>
+                <th>Membresia</th>
+                <th>Pelotas</th>
+                {isLogged && <th></th>}
                 </tr>
             </thead>
             <tbody>
-                {players.map((p) => {
-                    const player = playerModelToEntity(p);
-                    return (
-                        <tr key={player.id}>
-                            <td>{player.name}</td>
+                {
+                    players.map((player) => {
+                        const p = playerModelToEntity(player);
+                        return (
+                            <tr key={p.id}>
+                                <td>{p.name}</td>
+                                <td className={`${(!p.isMembershipValid && !isLogged) ? 'red' : ''}`} >{isLogged ? 
+                                    <button onClick={() => toggleMemberShip(p.id)}  className={`btn-primary ${p.isMembershipValid ? '' : 'red'}`}>{p.isMembershipValid ? 
+                                    'Pagado' : 'Sin pagar'}</button> : p.isMembershipValid ? 
+                                    'Pagado' : 'Sin pagar'}</td>
 
-                            <td >{player.isMembershipValid ? 'pagago' : 'no pagado'}
-                                 {isLogged && <FontAwesomeIcon onClick={ () => toggleMemberShip(player.id) }
-                                 className={`icon-btn ${player.isMembershipValid ? 'red' :'green'}`} icon={ player.isMembershipValid ? faX : faCheck} />
-                                } </td>
-
-                            <td>{player.isPayedBalls ? 'pagago' : 'no pagado'}
-                            {isLogged && <FontAwesomeIcon onClick={() => togglePayedBalls(player.id)}
-                            className={`icon-btn ${player.isPayedBalls ? 'red' :'green'}`} icon={ player.isPayedBalls ? faX : faCheck} />
-                                }
-                            </td>
-                            {isLogged && <td><button className="alert-btn" onClick={ () => handleDeleteClick(player.id) }>Eliminar</button></td>}
-                        </tr>
-                    );
-                })}
+                                <td className={`${(!p.isPayedBalls && !isLogged) ? 'red' : ''}`}>
+                                {isLogged ? 
+                                    <button onClick={() => togglePayedBalls(p.id)}  className={`btn-primary ${p.isPayedBalls ? '' : 'red'}`}>{p.isPayedBalls ? 
+                                    'Pagado' : 'Sin pagar'}</button> : p.isPayedBalls ? 
+                                    'Pagado' : 'Sin pagar'}
+                                </td>
+                                {isLogged && <td><FontAwesomeIcon icon={faTrash} onClick={() => handleDeleteClick(p.id)}
+                                className="alert-btn"></FontAwesomeIcon></td>}
+                            </tr>
+                        )
+                    })
+                }
             </tbody>
         </table>
+        </div>
         <Modal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}

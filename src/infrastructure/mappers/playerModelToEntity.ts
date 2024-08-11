@@ -1,5 +1,6 @@
 import { Player } from "../../domain/entitie/player"
 import { PlayerModel } from "../../domain/models/playerModel"
+import { matchPlayerModelToEntity } from "./matchPlayerModelToEntity"
 
 
 
@@ -11,6 +12,9 @@ export const playerModelToEntity = ( player: PlayerModel ) => {
         isMembershipValid: player.isMembershipValid,
         singlePoints: player.singlePoints,
         isPayedBalls: player.isPayedBalls,
-        lastUpdated: player.UpdatedAt
+        lastUpdated: player.UpdatedAt,
+        matchPlayers: player.matchPlayers.map((m) => {
+            return matchPlayerModelToEntity(m)
+        } ),
     })
 }

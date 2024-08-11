@@ -12,7 +12,7 @@ export const NewPlayerForm = () => {
     return (
         <form onSubmit={handleSubmit} className='new-player-form'>
             <input type="text" name="name" placeholder="Nombre del jugador" />
-            <button type="submit" className='btn-primary'>Crear Jugador</button>
+            <button type="submit" className='btn-primary'>Agregar Jugador</button>
         </form>
     );
 };

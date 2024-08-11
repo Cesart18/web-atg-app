@@ -8,6 +8,16 @@ export class PlayerDatasourceImpl implements PlayerDatasource{
     constructor(urlApi:string){
         this.urlApi = urlApi;
     }
+    async getPlayerById(id: number): Promise<PlayerModel> {
+        const url = `${this.urlApi}/api/player/${id}`;
+        try {
+            const resp = await fetch(url);
+            const data = await resp.json();
+            return data;
+        } catch (error) {
+            throw new Error(`Error al buscar el usuario con el id ${id}`)
+        }
+    }
     
     async createPlayer(name: string): Promise<void> {
         const token = localStorage.getItem('token')
@@ -74,18 +84,7 @@ export class PlayerDatasourceImpl implements PlayerDatasource{
             throw new Error('error al cambiar de estado')
         }
     }
-    plusDoublePoints(_id: number, _points: number): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
-    minusDoublePoints(_id: number, _points: number): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
-    plusSinglePoints(_id: number, _points: number): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
-    minusSinglePoints(_id: number, _points: number): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
+
     async deletePlayer(id: number): Promise<void> {
         const token = localStorage.getItem('token')
         const url = `${this.urlApi}/api/player/${id}`;

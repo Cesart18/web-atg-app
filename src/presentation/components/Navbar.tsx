@@ -1,7 +1,7 @@
 import '../components/components.css';
 import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRightFromBracket, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../config/hooks/useAuth';
 // import { useAuth } from '../../context/AuthContext';
 
@@ -25,8 +25,8 @@ export const Navbar = () => {
         </div>
       {
         isLogged ?
-          <button className='icon-btn icon-logout'><FontAwesomeIcon onClick={logoutHandle}   icon={faRightFromBracket} /></button>
-          : <button className='icon-btn'><FontAwesomeIcon onClick={() => navigate('/login')} icon={faRightToBracket} /></button>
+          <button className='icon-btn'><FontAwesomeIcon onClick={logoutHandle}   icon={faRightFromBracket} /></button>
+          : <button className='icon-btn'><FontAwesomeIcon onClick={() => navigate('/login')} icon={faUser} /></button>
       }
     </nav>
   )

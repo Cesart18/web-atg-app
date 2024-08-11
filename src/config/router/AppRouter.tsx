@@ -4,6 +4,7 @@ import { Home } from "../../presentation/pages/Home"
 import { Singles } from "../../presentation/pages/Singles"
 import { Login } from "../../presentation/pages/Login"
 import { usePlayer } from '../hooks/userPlayer';
+import { PlayerDetailsPage } from '../../presentation/pages/PlayerDetailsPage';
 
 export const AppRouter = () => {
   const { players } = usePlayer();
@@ -13,6 +14,7 @@ export const AppRouter = () => {
         <Route path="/doubles" element={<Doubles players={players} />} />
         <Route path="/singles" element={<Singles players={players} />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/players/:id" element={<PlayerDetailsPage />} />
       </Routes>
   )
 }

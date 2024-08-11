@@ -1,3 +1,5 @@
+import { MatchPlayer } from "./matchPlayer";
+
 interface PlayerConstructorParams {
     id: number;
     name: string;
@@ -6,6 +8,7 @@ interface PlayerConstructorParams {
     isMembershipValid: boolean;
     isPayedBalls: boolean;
     lastUpdated: Date;
+    matchPlayers: MatchPlayer[];
   }
   
   export class Player {
@@ -16,8 +19,9 @@ interface PlayerConstructorParams {
     isMembershipValid: boolean;
     isPayedBalls: boolean;
     lastUpdated: Date;
+    matchPlayers: MatchPlayer[];
   
-    constructor({ id, name, singlePoints, doublePoints, isMembershipValid, isPayedBalls, lastUpdated }: PlayerConstructorParams) {
+    constructor({ id, name, singlePoints, doublePoints, isMembershipValid, isPayedBalls, lastUpdated, matchPlayers }: PlayerConstructorParams) {
       this.id = id
       this.name = name;
       this.singlePoints = singlePoints;
@@ -25,5 +29,6 @@ interface PlayerConstructorParams {
       this.isMembershipValid = isMembershipValid;
       this.isPayedBalls = isPayedBalls;
       this.lastUpdated = lastUpdated;
+      this.matchPlayers = matchPlayers
     }
   }
