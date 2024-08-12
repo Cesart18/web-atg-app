@@ -20,9 +20,15 @@ export const NewMatchForm: React.FC<Props> = ({ isDouble }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    
     const ids = isDouble ? [winnerPlayerId, partnerPlayerId, firstOpponentId, secondtOpponentId]
     : [winnerPlayerId, firstOpponentId];
+
+    const none = ids.some((i) => i === 0)
+    if (none) {
+      alert('Por favor seleccione todos los campos');
+      return;
+    };
 
     addMatch(ids,score)
     setWinnerPlayerId(0)
@@ -38,14 +44,14 @@ export const NewMatchForm: React.FC<Props> = ({ isDouble }) => {
         {/* Ganador */}
         <div className="select-container">
         <label htmlFor="winner">Ganador</label>
-        <select value={winnerPlayerId} onChange={(e) => setWinnerPlayerId(Number(e.target.value))
-        }
+        <select value={winnerPlayerId} onChange={(e) => setWinnerPlayerId(Number(e.target.value))}
         name="winner" id="winner" required>
         <option value={0}>Seleccione...</option>
             {
-                playersEntity.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)
+                playersEntity.filter((p) => p.isMembershipValid).map((p) => <option key={p.id} value={p.id}>{p.name}</option>)
             }
         </select>
+        
         </div>
 
             {/* partner  */}
@@ -55,9 +61,9 @@ export const NewMatchForm: React.FC<Props> = ({ isDouble }) => {
         <label htmlFor="partner">Compañero</label>
         <select value={partnerPlayerId} onChange={(e) => setPartnerPlayerId(Number(e.target.value))}
         name="partner" id="partner">
-        <option value={0}>Seleccione...</option>
+          <option value={0}>Seleccione...</option>
             {
-                playersEntity.filter((p) => p.id !== winnerPlayerId)
+                playersEntity.filter((p) => p.isMembershipValid && p.id !== winnerPlayerId)
                 .map((p) => (<option key={p.id} value={p.id}>{p.name}</option>))
             }
         </select>
@@ -72,7 +78,7 @@ export const NewMatchForm: React.FC<Props> = ({ isDouble }) => {
         name="firstOpponent" id="firstOpponent" required>
         <option value={0}>Seleccione...</option>
             {
-                playersEntity.filter((p) => p.id !== winnerPlayerId && p.id !== partnerPlayerId)
+                playersEntity.filter((p) => p.isMembershipValid && p.id !== winnerPlayerId && p.id !== partnerPlayerId)
                 .map((p) => (<option key={p.id} value={p.id}>{p.name}</option>))
             }
         </select>
@@ -86,7 +92,7 @@ export const NewMatchForm: React.FC<Props> = ({ isDouble }) => {
         name="secondOpponent" id="secondOpponent">
         <option value={0}>Seleccione...</option>
             {
-                playersEntity.filter((p) => p.id !== winnerPlayerId && p.id !== partnerPlayerId && p.id !== firstOpponentId)
+                playersEntity.filter((p) => p.isMembershipValid && p.id !== winnerPlayerId && p.id !== partnerPlayerId && p.id !== firstOpponentId)
                 .map((p) => (<option key={p.id} value={p.id}>{p.name}</option>))
             }
         </select>
@@ -97,6 +103,7 @@ export const NewMatchForm: React.FC<Props> = ({ isDouble }) => {
         <label htmlFor="score">Puntaje</label>
         <input
           type="text"
+          id='score'
           value={score}
           onChange={(e) => setScore(e.target.value)}
           required

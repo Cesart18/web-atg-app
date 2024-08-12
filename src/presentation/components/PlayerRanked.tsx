@@ -1,7 +1,7 @@
 import React from 'react'
 import { playerModelToEntity } from '../../infrastructure/mappers/playerModelToEntity'
 import { PlayerModel } from '../../domain/models/playerModel'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 interface PlayerRankingProps {
