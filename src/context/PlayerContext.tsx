@@ -26,21 +26,9 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({children}) => {
     const [players, setPlayers] = useState<PlayerModel[]>([]);
     
     const fetchPlayers = async () => {
-        // const cachedPlayers = localStorage.getItem('players');
-        // const lastFetchTime = localStorage.getItem('lastFetchTime');
-        const currentTime = Date.now();
-        // const EXPIRATION_TIME = 10 * 60 * 1000;
-
-        // if (cachedPlayers && lastFetchTime && (currentTime - parseInt(lastFetchTime) < EXPIRATION_TIME)) {
-        //     setPlayers(JSON.parse(cachedPlayers));
-        //     return;
-        // }
-
         try {
             const newPlayers = await repository.getPlayers();
             setPlayers(newPlayers);
-            localStorage.setItem('players', JSON.stringify(newPlayers));
-            localStorage.setItem('lastFetchTime', currentTime.toString());
         } catch (error) {
             console.error(error);
         }
