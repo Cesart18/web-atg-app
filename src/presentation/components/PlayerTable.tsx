@@ -80,6 +80,7 @@ export const PlayerTable: React.FC<PlayerTableProps>  = ({ isLogged }) => {
                 onConfirm={handleConfirmDelete}
                 message={`¿Estás seguro de que deseas eliminar a: `}
                 name={`${player?.name}?`}
+                isDelete ={true}
             />
 
         </>

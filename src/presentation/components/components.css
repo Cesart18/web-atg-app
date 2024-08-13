@@ -169,6 +169,11 @@ strong{
   color: black;
 }
 
+.info{
+  display: flex;
+  justify-content: space-between;
+}
+
 @media (width > 768px) {
   .table-container, table{
     width: 100%;

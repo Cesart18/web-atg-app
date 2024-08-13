@@ -1,10 +1,6 @@
-
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Player } from '../../domain/entitie/player';
 import { playerModelToEntity } from '../../infrastructure/mappers/playerModelToEntity';
 import { PlayerModel } from '../../domain/models/playerModel';
-import { MatchPlayer } from '../../domain/entitie/matchPlayer';
 
 
 
@@ -14,27 +10,14 @@ interface Props{
 
 export const PlayerDetailsPage: React.FC<Props> = ({playersModel}) => {
   const { id } = useParams(); 
-  const [player, setPlayer] = useState<Player | undefined>(undefined);
-  const [matchPlayers, setMatchPlayers] = useState<MatchPlayer[] | undefined>([])
   const players = playersModel.map((p) => playerModelToEntity(p))
-
-
-
-  useEffect(() => {
-    const fetchPlayerDetails =  () => {
-      const p = players.find((player) => player.id === Number(id) )
-      setPlayer(p)
-
-      const sortedMatchPlayers = p?.matchPlayers?.sort((a, b) => {
-        return new Date(b.match.date).getTime() - new Date(a.match.date).getTime();
-      });
-
-      setMatchPlayers(sortedMatchPlayers?.slice(0, 10));
-
-    };
-
-    fetchPlayerDetails();
-  }, [id]);
+  const player = players.find((player) => player.id === Number(id) )
+  const sortedMatchPlayers = player?.matchPlayers?.sort((a, b) => {
+    return new Date(b.match.date).getTime() - new Date(a.match.date).getTime();
+  });
+  
+  const matchPlayers = sortedMatchPlayers?.slice(0, 10)
+  
 
   if (!player) {
     return <div>Cargando...</div>;
@@ -71,12 +54,11 @@ export const PlayerDetailsPage: React.FC<Props> = ({playersModel}) => {
               const opponentsMatch = playersMatch?.filter((p) => p.isWinner != mp.isWinner);
 
               const opponetsIds = opponentsMatch?.map((p) => p.playerId);
-              const dateObject = new Date(mp.match.date);
+              const formattedDateString = mp.match.date.replace(' +0000 UTC', '').replace(' ', 'T');
+              const dateObject = new Date(formattedDateString);
 
-// Formatear la fecha como YYYY-MM-DD
-            const formattedDate = dateObject.toISOString().split('T')[0];
+              const date = dateObject.toISOString().split('T')[0];
 
-              
               const partner = players.find((p) => p.id == partnerMatch?.playerId);
               const opponents = players.filter((p) => opponetsIds?.includes(p.id));
 
@@ -84,7 +66,7 @@ export const PlayerDetailsPage: React.FC<Props> = ({playersModel}) => {
                 <td>{( mp.match.matchType === "double" ? 'Doble' : 'Single' )}</td>
                 <td>{mp.match.score}</td>
                 <td>{mp.isWinner ? 'Si' : 'No'}</td>
-                <td>{formattedDate}</td>
+                <td>{date}</td>
                 <td>{partner?.name}</td>
                 <td>{opponents.length > 1?
                 opponents?.map((op) => op.name).join(' /')

@@ -2,6 +2,8 @@ import React from 'react'
 import { playerModelToEntity } from '../../infrastructure/mappers/playerModelToEntity'
 import { PlayerModel } from '../../domain/models/playerModel'
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 interface PlayerRankingProps {
@@ -32,7 +34,7 @@ export const PlayerRanked: React.FC<PlayerRankingProps>  = ({ isDouble, players 
         return (
           <tr key={p.ID} className='details' onClick={() => handleRowClick(player.id)} >
             <td>{players.indexOf(p) + 1}</td>
-            <td>{player.name}</td>
+            <td className='info '>{player.name} <FontAwesomeIcon icon={faPlus} className='icon-btn' /></td>
             <td>{isDouble? player.doublePoints : player.singlePoints }</td>
           </tr>
 

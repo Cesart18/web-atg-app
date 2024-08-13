@@ -46,6 +46,7 @@ export const NewPlayerForm: React.FC = () => {
                 onConfirm={handleConfirm}
                 message={`Está seguro de que desea agregar a: `}
                 name={`${confirmName}?`}
+                isDelete = {false}
             />
             )}
         </>
